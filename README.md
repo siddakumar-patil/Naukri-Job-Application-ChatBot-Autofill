@@ -44,7 +44,9 @@ Answers are configured in a simple JSON format using keyword matching:
 ## How to Use
 
 1. **Clone the repo** or **download it as a ZIP** and extract it.
-2.  **Update** `keywords.json` with related data like name, expected CTC etc.
+2. **Update Keywords.json** ⚠️  
+   **This step is required** — Update `keywords.json` with related data like `location`, `experience`, etc.
+
 3. Open **Google Chrome** and go to: `chrome://extensions`
 4. **Enable Developer Mode** if not enabled (toggle at the top-right corner).
 5. Click **"Load Unpacked"** and select the project folder.
