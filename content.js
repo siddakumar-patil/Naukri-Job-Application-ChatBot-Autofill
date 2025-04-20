@@ -1,7 +1,5 @@
-// Note: Class name to getElements might change, so check the actual class names
 let keywordsMap = {};
-
-const answeredQuestions = new Set(); // to keep track of answered questions
+const answeredQuestions = new Set();
 
 function log(...args) {
   console.log("[ Naukri Autofill ]: ", ...args);
