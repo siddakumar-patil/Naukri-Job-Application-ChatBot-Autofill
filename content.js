@@ -11,8 +11,8 @@
 // TODO: Remove hard coded values and use a settings page to manage the questions and answers
 const keywordsMap = {
   "title": "Software Engineer",
-  "First Name": "John",
-  "Last Name": "Doe",
+  "First Name": "Siddakumar",
+  "Last Name": "Patil",
   "Email": "test@test.com",
   "Phone": "1234567890",
   "current location": "Bengaluru, KA, India",
