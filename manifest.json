@@ -4,6 +4,12 @@
     "version": "1.0",
     "description": "Autofills chatbot fields on Naukri job apply page",
     "permissions": ["scripting"],
+    "web_accessible_resources": [
+      {
+        "resources": ["keywords.json"],
+        "matches": ["<all_urls>"]
+      }
+    ],
     "content_scripts": [
       {
         "matches": ["https://www.naukri.com/job-listings-*"],
