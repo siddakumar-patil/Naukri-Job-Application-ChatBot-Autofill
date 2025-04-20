@@ -44,12 +44,12 @@ Answers are configured in a simple JSON format using keyword matching:
 ## How to Use
 
 1. **Clone the repo** or **download it as a ZIP** and extract it.
-2. Open **Google Chrome** and go to: `chrome://extensions`
-3. **Enable Developer Mode** if not enabled (toggle at the top-right corner).
-4. Click **"Load Unpacked"** and select the project folder.
-
-5. Navigate to a **Naukri job listing** that opens a chatbot (URL starts with `https://www.naukri.com/job-listings-`).
-6. The extension will:
+2.  **Update** `keywords.json` with related data like name, expected CTC etc.
+3. Open **Google Chrome** and go to: `chrome://extensions`
+4. **Enable Developer Mode** if not enabled (toggle at the top-right corner).
+5. Click **"Load Unpacked"** and select the project folder.
+6. Navigate to a **Naukri job listing** that opens a chatbot (URL starts with `https://www.naukri.com/job-listings-`).
+7. The extension will:
    -  Wait for the chatbot drawer to appear.
    - Detect the current question being asked.
    - Auto-fill an answer based on matching keywords from your `keywords.json`.
