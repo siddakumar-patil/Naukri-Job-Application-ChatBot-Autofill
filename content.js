@@ -5,35 +5,42 @@
 // 5. Optionally, you can set an interval to keep checking if the element appears again
 // 6. You can also add a check to see if the input field is already filled to avoid overwriting
 
-// TODO : Avoid spamming job applications
-// TODO : Add a delay between each submission
-// TODO : Add a settings page to manage the questions and answers - Take input from user in the form of JSON key-value pairs
-// TODO : Add a func to handle radio buttons in form based on question
+// TODO: Add a settings page to manage the questions and answers - Take input from user in the form of JSON key-value pairs
+// TODO: Add a func to handle radio buttons in form based on question
 
-const questionsMap = {
-  // TODO: Remove hard coded values and use a settings page to manage the questions and answers
-  "What is your current location?": "Hyderabad",
-  "What is your current company name?": "TCS",
-  "What is your current designation?": "Software Engineer",
-  "What is your current CTC in INR ?": "Rs.8,00,000 - Rs.12,00,000",
-  "What is your highest qualification?": "B.E/B.Tech",
-  "What is your highest qualification stream?": "Computer Science",
-  "What is your highest qualification university?": "NIT",
-  "What is your highest qualification year of passing?": "2020",
-  "What is your highest qualification percentage?": "70%",
-  "What is your current notice period?": "Immediate",
-  "What is your current role?": "Software Engineer",
-  "What is your current job type?": "Permanent",
-  "How many years of experience do you have in Java ?": "3 - 4",
-  "Do you have experience of working on a Product / in a Product based organization?":
-    "Yes",
-  "Are you currently living in or ready to relocate to Hyderabad?": "Yes",
-  "What is your expected annual CTC in INR ?": "Rs.12,00,000 - Rs.16,00,000",
-  "If serving notice, what is the last working day in the office?": "N.A",
+// TODO: Remove hard coded values and use a settings page to manage the questions and answers
+const keywordsMap = {
   "title": "Software Engineer",
   "First Name": "John",
   "Last Name": "Doe",
-  "Email": "test@test.com"
+  "Email": "test@test.com",
+  "Phone": "1234567890",
+  "current location": "Bengaluru, KA, India",
+  "current company": "Fidelity Information Services(FIS) (Fintech)",
+  "current organization": "Fidelity Information Services(FIS) (Fintech)",
+  "current designation": "Software Engineer",
+  "current CTC": "Rs.8,00,000 - Rs.12,00,000",
+  "current annual CTC": "Rs.8,00,000 - Rs.12,00,000",
+  "expected CTC": "Rs.12,00,000 - Rs.16,00,000",
+  "expected annual CTC": "Rs.8,00,000 - Rs.12,00,000",
+  "serving notice": "Yes",
+  "qualification": "B.E/B.Tech(Computer Science & Engineering)",
+  "specialization": "Computer Science & Engineering",
+  "degree": "B.E/B.Tech",
+  "branch": "Computer Science & Engineering",
+  "college":  "VTU, Belagavi, KA, India",
+  "university": "VTU, Belagavi, KA, India",
+  "year of passing": "2021",
+  "year of graduation": "2021",
+  "percentage": "80%",
+  "current job type": "Permanent",
+  "experience": "3 - 4 Years",
+  "ready to": "Yes",
+  "willing to": "Yes",
+  "experience of working on a Product": "Yes",
+  "relocate to": "Yes",
+  "Immediate": "Yes",
+  "IIT": "No",
 };
 
 const answeredQuestions = new Set(); // to keep track of answered questions
@@ -43,9 +50,17 @@ function log(...args) {
 }
 
 // Helper: generate answers based on the question
-function generateAns(question) {
-  const cleaned = question.trim();
-  return questionsMap[cleaned] || "N/A";
+function generateAnswerFromKeyword(question) {
+  const lowerQ = question.toLowerCase();
+
+  for (const keyword in keywordsMap) {
+    if (lowerQ.includes(keyword.toLocaleLowerCase())) {
+      log("Keyword matched:", keyword);
+      return keywordsMap[keyword];
+    }
+  }
+
+  return null; // No match found
 }
 
 // Check if we're on the right page
@@ -56,7 +71,7 @@ if (window.location.href.startsWith("https://www.naukri.com/job-listings-")) {
     const chatbotDrawer = Array.from(
       document.querySelectorAll(
         ".chatbot_InputBoxWrapper .chatbot_MessageContainer .chatbot_inputWrapper .chatbot_inputText, .chatbot-question-text"
-      ) // These might change, so check the actual class names
+      )
     );
 
     if (chatbotDrawer && chatbotDrawer[0]?.offsetParent !== null) {
@@ -74,12 +89,10 @@ if (window.location.href.startsWith("https://www.naukri.com/job-listings-")) {
         if (questionElem && inputField) {
           const question = questionElem.innerText;
 
-          // Skip if we've already answered this one
-          if (answeredQuestions.has(question)) return;
+          if (answeredQuestions.has(question)) return;  // Skip if we've already answered this one
+          if (inputField.innerText.trim().length > 0) return;// Skip if the user already typed something manually
 
-          // Skip if the user already typed something manually
-          if (inputField.innerText.trim().length > 0) return;
-          const responseText = generateAns(question);
+          const responseText = generateAnswerFromKeyword(question);
 
           inputField.innerText = responseText;
 
