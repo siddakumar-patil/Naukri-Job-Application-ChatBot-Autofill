@@ -1,0 +1,15 @@
+{
+    "manifest_version": 3,
+    "name": "Naukri Autofill Bot",
+    "version": "1.0",
+    "description": "Autofills chatbot fields on Naukri job apply page",
+    "permissions": ["scripting"],
+    "content_scripts": [
+      {
+        "matches": ["https://www.naukri.com/job-listings-*"],
+        "js": ["content.js"],
+        "run_at": "document_idle"
+      }
+    ]
+  }
+  
